@@ -13,27 +13,31 @@ class SearchButton extends StatelessWidget {
 
     const double borderRadius = 30;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 105.0),
-      child: OutlinedButton(
-        onPressed: onPressed,
-        style: ButtonStyle(
-            side: MaterialStateProperty.all(
-                const BorderSide(color: primaryColor, width: 1.4)),
-            padding: MaterialStateProperty.all(
-                const EdgeInsets.symmetric(vertical: 7, horizontal: 35)),
-            shape: MaterialStateProperty.all(const RoundedRectangleBorder(
-                borderRadius:
-                    BorderRadius.all(Radius.circular(borderRadius))))),
-        child:
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-          Text(
-            text,
-            style: const TextStyle(
-                fontSize: 18, fontWeight: FontWeight.w300, color: primaryColor),
-          ),
-          const Icon(Icons.arrow_forward, color: primaryColor)
-        ]),
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 105.0),
+        child: OutlinedButton(
+          onPressed: onPressed,
+          style: ButtonStyle(
+              side: MaterialStateProperty.all(
+                  const BorderSide(color: primaryColor, width: 1.4)),
+              padding: MaterialStateProperty.all(
+                  const EdgeInsets.symmetric(vertical: 7, horizontal: 35)),
+              shape: MaterialStateProperty.all(const RoundedRectangleBorder(
+                  borderRadius:
+                      BorderRadius.all(Radius.circular(borderRadius))))),
+          child:
+              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+            Text(
+              text,
+              style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w300,
+                  color: primaryColor),
+            ),
+            const Icon(Icons.arrow_forward, color: primaryColor)
+          ]),
+        ),
       ),
     );
   }
