@@ -24,13 +24,10 @@ class SearchInput extends StatelessWidget {
             color: Colors.grey.withOpacity(.1)),
       ]),
       child: TextFormField(
+        keyboardType: TextInputType.number,
         validator: validator,
         controller: searchController,
         textAlign: TextAlign.center,
-        onChanged: (value) {},
-        // inputFormatters: [
-        //   FilteringTextInputFormatter.allow(RegExp(r'[0-9]{5}-[0-9]{3}'))
-        // ],
         style: const TextStyle(fontSize: 15),
         decoration: InputDecoration(
           prefixIcon: const Icon(Icons.search, size: 20, color: Colors.blue),

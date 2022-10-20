@@ -10,8 +10,7 @@ class ResultCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      child: Container(
+    return Container(
         width: MediaQuery.of(context).size.width,
         height: 75,
         padding: const EdgeInsets.all(15.0),
@@ -26,27 +25,27 @@ class ResultCard extends StatelessWidget {
                 color: Colors.grey.withOpacity(.05)),
           ],
         ),
-        child: Row(
-          children: [
-            Text(text,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 18,
-                )),
-            const Spacer(),
-            Text(
-              subtitle,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                  color: Colors.grey,
-                  fontWeight: FontWeight.normal,
-                  fontSize: 12),
+        child: ListTile(
+          title: Text(
+            text,
+            style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 17,
             ),
-          ],
-        ),
-      ),
-    );
+          ),
+          subtitle: Text(
+            subtitle,
+            style: const TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 12,
+            ),
+          ),
+          leading: Icon(
+            Icons.location_on,
+            color: Colors.red.shade700,
+          ),
+        ));
   }
 }

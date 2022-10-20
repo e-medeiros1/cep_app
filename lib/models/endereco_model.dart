@@ -7,12 +7,14 @@ class EnderecoModel {
   final String logradouro;
   final String bairro;
   final String localidade;
-  final int ddd;
+  final String uf;
+  final String ddd;
   EnderecoModel({
     required this.cep,
     required this.logradouro,
     required this.bairro,
     required this.localidade,
+    required this.uf,
     required this.ddd,
   });
 
@@ -24,17 +26,19 @@ class EnderecoModel {
       'logradouro': logradouro,
       'bairro': bairro,
       'localidade': localidade,
+      'uf': uf,
       'ddd': ddd,
     };
   }
 
   factory EnderecoModel.fromMap(Map<String, dynamic> map) {
     return EnderecoModel(
-      cep: map['cep'] as String,
-      logradouro: map['logradouro'] as String,
-      bairro: map['bairro'] as String,
-      localidade: map['localidade'] as String,
-      ddd: map['ddd'] as int,
+      cep: map['cep'] ?? '',
+      logradouro: map['logradouro'] ?? '',
+      bairro: map['bairro'] ?? '',
+      localidade: map['localidade'] ?? '',
+      uf: map['uf'] ?? '',
+      ddd: map['ddd'] ?? '',
     );
   }
 
