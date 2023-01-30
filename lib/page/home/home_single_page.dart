@@ -1,5 +1,4 @@
-import 'package:cep_app/page/state_subclass/home_controller.dart';
-import 'package:cep_app/page/state_subclass/home_state.dart';
+import 'package:cep_app/page/state_single_class/home_state.dart';
 import 'package:cep_app/widgets/search_button.dart';
 import 'package:cep_app/widgets/search_input.dart';
 import 'package:flutter/material.dart';
@@ -7,16 +6,18 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:validatorless/validatorless.dart';
 
 import '../../widgets/result_card.dart';
+import '../state_single_class/home_single_class_controller.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class HomeSinglePage extends StatefulWidget {
+  const HomeSinglePage({super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<HomeSinglePage> createState() => _HomeSinglePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  final HomeController homeController = HomeController();
+class _HomeSinglePageState extends State<HomeSinglePage> {
+  final HomeSingleClassController homeSingleClassController =
+      HomeSingleClassController();
   final controller = TextEditingController();
   final formKey = GlobalKey<FormState>();
 
@@ -32,10 +33,10 @@ class _HomePageState extends State<HomePage> {
       onTap: () {
         FocusManager.instance.primaryFocus?.unfocus();
       },
-      child: BlocListener<HomeController, HomeState>(
-        bloc: homeController,
+      child: BlocListener<HomeSingleClassController, HomeState>(
+        bloc: homeSingleClassController,
         listener: (context, state) {
-          if (state is HomeFailure) {
+          if (state.status == HomeStatus.failure) {
             ScaffoldMessenger.of(context).showSnackBar(
               const SnackBar(
                 content: Text('Não foi possível carregar CEP!'),
@@ -73,34 +74,34 @@ class _HomePageState extends State<HomePage> {
                           final valid =
                               formKey.currentState?.validate() ?? false;
                           if (valid) {
-                            homeController.buscaCep(controller.text);
+                            homeSingleClassController.buscaCep(controller.text);
                           }
                         }),
                     const SizedBox(height: 20),
                     //Visibility
-                    BlocBuilder<HomeController, HomeState>(
-                      bloc: homeController,
+                    BlocBuilder<HomeSingleClassController, HomeState>(
+                      bloc: homeSingleClassController,
                       builder: (context, state) {
                         return Visibility(
-                          visible: state is HomeLoading,
+                          visible: state.status == HomeStatus.loading,
                           replacement: const Center(child: SizedBox.shrink()),
                           child:
                               const Center(child: CircularProgressIndicator()),
                         );
                       },
                     ),
-                    BlocBuilder<HomeController, HomeState>(
-                      bloc: homeController,
+                    BlocBuilder<HomeSingleClassController, HomeState>(
+                      bloc: homeSingleClassController,
                       builder: (context, state) {
-                        if (state is HomeLoaded) {
-                          if (state.enderecoModel.cep.isEmpty) {
+                        if (state.status == HomeStatus.loaded) {
+                          if (state.enderecoModel!.cep.isEmpty) {
                             return const SizedBox.shrink();
                           } else {
                             return ResultCard(
                                 text:
-                                    '${state.enderecoModel.logradouro}, ${state.enderecoModel.bairro}, ${state.enderecoModel.localidade}, ${state.enderecoModel.uf}',
+                                    '${state.enderecoModel?.logradouro}, ${state.enderecoModel?.bairro}, ${state.enderecoModel?.localidade}, ${state.enderecoModel?.uf}',
                                 subtitle:
-                                    '${state.enderecoModel.cep}, ${state.enderecoModel.ddd}');
+                                    '${state.enderecoModel?.cep}, ${state.enderecoModel?.ddd}');
                           }
                         } else {
                           return const Center(child: SizedBox.shrink());
