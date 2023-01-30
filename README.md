@@ -2,7 +2,7 @@
 <h2 align="center"> Consulta CEP </h2>  
 <h2> Sobre </h2>
 <p >
- Consome api do VIACEP com validação e padrão na organização de pastas com model, repositório, pages e widgets
+ Consome api do VIACEP com validação e padrão na organização de pastas com model, repositório, pages e conceitos de Single class e Sub class do BloC
 </p>  
 
 <h2> Resultado </h2>  
